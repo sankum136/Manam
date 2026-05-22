@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Manam Classic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #4a4a4a;
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .dashboard {
+            background: var(--card-bg);
+            padding: 4rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #f0e6d2;
+        }
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .btn {
+            padding: 1.25rem 2rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid var(--text);
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        .btn:hover {
+            background: var(--text);
+            color: white;
+            transform: translateY(-3px);
+        }
+        .logout {
+            margin-top: 3rem;
+            color: #8b0000;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .logo-container {
+            margin-bottom: 2.5rem;
+        }
+        .logo-container img {
+            height: 80px;
+            width: 80px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Manam Logo">
+        </div>
+        <h2>Administrative Console</h2>
+        <div class="nav-links">
+            <a href="/open_add_restaurant/" class="btn">Establish Restaurant</a>
+            <a href="/show_restaurants/" class="btn">Curate Establishments</a>
+            <a href="/signup/" class="btn">Patron Management</a>
+        </div>
+        <a href="/signin/" class="logout">Secure Logout</a>
+    </div>
+</body>
+</html>

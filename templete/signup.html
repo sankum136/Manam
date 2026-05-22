@@ -1,0 +1,221 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Manam Classic</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Join Manam Classic for a timeless culinary experience. Create your account and explore curated gourmet deliveries.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --azure: #003554;
+            --azure-light: #0582ca;
+            --gold: #e9c46a;
+            --gold-dark: #cc9900;
+            --white: #ffffff;
+            --bg-offset: #f0f4f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            color: var(--azure);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-offset) 0%, var(--white) 100%);
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 4rem 3.5rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(0, 53, 84, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 40px 100px rgba(0, 53, 84, 0.05);
+            animation: cardFade 0.8s ease-out;
+        }
+
+        @keyframes cardFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-line {
+            width: 40px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 2rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--azure);
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            color: var(--azure);
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(0, 53, 84, 0.1);
+            padding: 0.8rem 0;
+            color: var(--azure);
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        input:focus {
+            border-bottom-color: var(--gold);
+            padding-left: 0.5rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--azure);
+            border: none;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.4s;
+        }
+
+        .btn-submit:hover {
+            background: var(--azure-light);
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 53, 84, 0.15);
+        }
+
+        .footer-links {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .footer-links a {
+            color: var(--azure);
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            border-bottom: 1px solid var(--gold);
+        }
+
+        .error-message {
+            background: var(--error-bg);
+            color: var(--error-text);
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            border-left: 3px solid #c0392b;
+            text-align: left;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2.5rem 1.5rem;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-container"></div>
+    <div class="background-overlay"></div>
+
+    <main class="login-card">
+        <header>
+            <div class="header-line"></div>
+            <h1>Create Account</h1>
+            <p class="tagline">The Art of Fine Dining</p>
+        </header>
+
+        {% if message %}
+        <div class="error-message" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        <form action="/handle_signup/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+            </div>
+
+            <button type="submit" class="btn-submit">Create Your Account</button>
+        </form>
+
+        <footer class="footer-links">
+            <span>Already have an account?</span>
+            <a href="/signin/">Sign In</a>
+        </footer>
+    </main>
+
+</body>
+
+</html>

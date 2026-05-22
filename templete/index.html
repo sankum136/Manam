@@ -1,0 +1,597 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manam | Classic Excellence</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Manam Classic Excellence - A curated culinary journey delivering the finest gourmet experiences to your doorstep.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --azure: #003554;
+            --azure-light: #0582ca;
+            --gold: #e9c46a;
+            --gold-dark: #cc9900;
+            --bg-pure: #ffffff;
+            --text-main: #001d3d;
+            --border: rgba(0, 53, 84, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-pure);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Mediterranean Hero */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero-frame {
+            position: absolute;
+            top: 5rem;
+            left: 5rem;
+            right: 5rem;
+            bottom: 5rem;
+            border: 1px solid var(--border);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-dish {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: url("{% static 'images/login_bg.png' %}") center center / cover no-repeat;
+            border-radius: 50%;
+            border: 15px solid white;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            animation: dishFloat 8s ease-in-out infinite;
+        }
+
+        .dish-left {
+            top: 10%;
+            left: -100px;
+        }
+
+        .dish-right {
+            bottom: 10%;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--azure);
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: var(--gold-dark);
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1.2rem 3.5rem;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s;
+            border-radius: 0;
+        }
+
+        .btn-azure {
+            background: var(--azure);
+            color: white;
+        }
+
+        .btn-azure:hover {
+            background: var(--azure-light);
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 53, 84, 0.2);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--azure);
+            color: var(--azure);
+        }
+
+        .btn-outline:hover {
+            background: var(--azure);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 10rem 10%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid transparent;
+            transition: all 0.5s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--gold);
+            background: #fffcf5;
+        }
+
+        .feature-icon {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--azure);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--azure);
+        }
+
+        .feature-item p {
+            color: #666;
+            line-height: 2;
+        }
+
+        @keyframes dishFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(20px, -30px) rotate(5deg);
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .floating-dish {
+                display: none;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Welcome Story Section */
+        .welcome-story {
+            padding: 10rem 10%;
+            text-align: center;
+            background: #fffcf5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-story::before {
+            content: '“';
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 15rem;
+            color: var(--gold);
+            opacity: 0.1;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--azure);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 1.5rem auto 0;
+        }
+
+        .welcome-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            color: #444;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Signature Dishes Section */
+        .signature-dishes {
+            padding: 10rem 5%;
+            background: white;
+        }
+
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .dish-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0, 53, 84, 0.1);
+            border-color: var(--gold);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 300px;
+            background: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dish-info {
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .dish-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--azure);
+            margin-bottom: 1rem;
+        }
+
+        .dish-info p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Chef Experience Section */
+        .chef-experience {
+            padding: 10rem 10%;
+            display: flex;
+            align-items: center;
+            gap: 6rem;
+            background: var(--azure);
+            color: white;
+            position: relative;
+        }
+
+        .chef-image-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .chef-image {
+            width: 100%;
+            height: 600px;
+            background: #002842;
+            border: 1px solid rgba(233, 196, 106, 0.3);
+            object-fit: cover;
+        }
+
+        .chef-badge {
+            position: absolute;
+            bottom: -2rem;
+            right: -2rem;
+            background: var(--gold);
+            color: var(--azure);
+            padding: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .chef-content {
+            flex: 1.2;
+        }
+
+        .chef-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.1;
+        }
+
+        .chef-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        /* Reservation Banner */
+        .reservation-banner {
+            padding: 8rem 5%;
+            text-align: center;
+            background: #fff;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reservation-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--azure);
+            margin-bottom: 1.5rem;
+        }
+
+        .reservation-banner p {
+            font-size: 1.2rem;
+            color: #777;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        /* Delivery Features */
+        .delivery-features {
+            padding: 8rem 10%;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            padding: 3rem 2rem;
+            background: #fdfbf7;
+            border: 1px solid transparent;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--gold);
+            background: white;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .feature-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--azure);
+            margin-bottom: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1200px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 992px) {
+            .dish-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chef-experience {
+                flex-direction: column;
+                padding: 6rem 5%;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .chef-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="hero-frame"></div>
+        <div class="floating-dish dish-left"></div>
+        <div class="floating-dish dish-right"></div>
+
+        <div class="hero-content">
+            <span class="tagline">The Art of Fine Dining</span>
+            <h1>Manam</h1>
+            <div class="btn-group">
+                <a href="/signin/" class="btn btn-azure">Sign In</a>
+                <a href="/signup/" class="btn btn-outline">Join the Ritual</a>
+            </div>
+        </div>
+    </header>
+
+
+
+
+    <!-- Welcome Story Section -->
+    <section class="welcome-story">
+        <h2 class="section-title">A Journey Through Coastal Flavors</h2>
+        <div class="welcome-content">
+            <p>“At Manam, every dish is inspired by timeless coastal traditions, refined with modern culinary artistry.
+                We create experiences that celebrate warmth, culture, and unforgettable taste.”</p>
+        </div>
+    </section>
+
+    <!-- Signature Dishes Section -->
+    <section class="signature-dishes">
+        <h2 class="section-title" style="text-align: center;">Signature Dishes</h2>
+        <div class="dish-grid">
+            <div class="dish-card">
+                <div class="dish-image"
+                    style="background: url('{% static 'images/seafood.png' %}') center center / cover;"></div>
+                <div class="dish-info">
+                    <h4>Royal Seafood Platter</h4>
+                    <p>Fresh ocean flavors crafted with Mediterranean spices.</p>
+                </div>
+            </div>
+            <div class="dish-card">
+                <div class="dish-image" style="background: url('{% static 'images/lamb.png' %}') center 60% / cover;">
+                </div>
+                <div class="dish-info">
+                    <h4>Firewood Lamb Roast</h4>
+                    <p>Slow-cooked perfection with aromatic herbs.</p>
+                </div>
+            </div>
+            <div class="dish-card">
+                <div class="dish-image" style="background: url('{% static 'images/rice.png' %}') 75% 20% / cover;">
+                </div>
+                <div class="dish-info">
+                    <h4>Golden Saffron Rice</h4>
+                    <p>Rich, fragrant, and elegantly prepared.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Delivery Features Section -->
+    <section class="delivery-features">
+        <h2 class="section-title" style="text-align: center;">Beyond the Threshold</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-card-icon">🚚</span>
+                <h4>Fast Premium Delivery</h4>
+                <p>Freshly prepared meals delivered quickly while maintaining perfect taste and quality.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-card-icon">🍱</span>
+                <h4>Elegant Packaging</h4>
+                <p>Luxury eco-friendly packaging designed to preserve warmth and presentation.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-card-icon">🕒</span>
+                <h4>Live Order Tracking</h4>
+                <p>Track your order in real-time from kitchen preparation to doorstep delivery.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-card-icon">⭐</span>
+                <h4>Curated Meal Experience</h4>
+                <p>Every delivery includes chef-recommended pairings and signature flavors.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Chef Experience Section -->
+    <section class="chef-experience">
+        <div class="chef-image-container">
+            <div class="chef-image" style="background: url('{% static 'images/chef.png' %}') center center / cover;">
+            </div>
+            <div class="chef-badge">Mastery of the Flame</div>
+        </div>
+        <div class="chef-content">
+            <h2>Crafted by Master Chefs</h2>
+            <p class="chef-text">“Our chefs blend heritage recipes with contemporary techniques, transforming every meal
+                into a ritual of elegance and authenticity.”</p>
+            <a href="/signin/" class="btn btn-outline" style="color: var(--gold); border-color: var(--gold);">Discover
+                the Craft</a>
+        </div>
+    </section>
+
+    <!-- Reservation Banner -->
+    <div class="reservation-banner">
+        <h2>Reserve Your Table Today</h2>
+        <p>“Experience intimate dining, curated flavors, and exceptional hospitality.”</p>
+        <a href="/signin/" class="btn btn-azure">Secure a Table</a>
+    </div>
+
+
+    {% include 'footer.html' %}
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Manam Classic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #4a4a4a;
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 4rem 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 4rem;
+            border: 1px solid #f0e6d2;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid #f0e6d2;
+        }
+        .item-info h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .item-info p {
+            margin: 0.5rem 0 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .item-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        .btn-remove {
+            color: #8b0000;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cart-total {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .total-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .btn-checkout {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--text);
+        }
+        .btn-checkout:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-muted);
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Return to Selection</a>
+        <h1>Your Selection</h1>
+        
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <div class="item-info">
+                <h3>{{ item.menu_item.name }}</h3>
+                <p>Quantity: {{ item.quantity }}</p>
+            </div>
+            <div class="item-actions">
+                <span class="price">₹{{ item.menu_item.price }}</span>
+                <a href="/remove_from_cart/{{ item.id }}/" class="btn-remove">Remove</a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-cart">
+            <p>Your collection is currently empty.</p>
+            <a href="/" class="btn-checkout" style="margin-top: 2rem;">Explore Restaurants</a>
+        </div>
+        {% endfor %}
+
+        {% if cart_items %}
+        <div class="cart-total">
+            <div>
+                <span style="color: var(--text-muted); font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Grand Total</span>
+                <div class="total-amount">₹{{ total }}</div>
+            </div>
+            <a href="/place_order/" class="btn-checkout">Complete Order</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

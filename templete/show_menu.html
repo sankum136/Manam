@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ restaurant.name }} Menu | Manam Classic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #4a4a4a;
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #f0e6d2;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .brand img {
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        .menu-card {
+            background: var(--card-bg);
+            border: 1px solid #f0e6d2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.4s;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.08);
+        }
+        .menu-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: sepia(10%);
+        }
+        .menu-info {
+            padding: 2rem;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .menu-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .menu-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .divider {
+            width: 30px;
+            height: 1px;
+            background: var(--primary);
+            margin: 1rem auto;
+        }
+        .menu-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .btn-group {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--text);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            background: transparent;
+            color: var(--text);
+        }
+        .btn:hover {
+            background: var(--text);
+            color: white;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--text);
+            border-color: var(--text);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .nav-btn {
+            font-family: 'Playfair Display', serif;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            margin-left: 2rem;
+            transition: color 0.3s;
+        }
+        .nav-btn:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="brand">
+            <img src="{% static 'images/logo.png' %}" alt="Manam Logo">
+            <h1>{{ restaurant.name }} Menu</h1>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <a href="/view_cart/" class="nav-btn">🛒 Cart</a>
+            <a href="/my_orders/" class="nav-btn">📋 Orders</a>
+            {% if is_admin %}
+            <a href="/add_menu_item/{{ restaurant.id }}/" class="btn btn-primary" style="margin-left: 2rem;">+ Add Item</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% for item in menu_items %}
+        <div class="menu-card">
+            {% if item.image %}
+            <img src="{{ item.image }}" class="menu-img" alt="{{ item.name }}">
+            {% else %}
+            <div style="height: 200px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; color: #ccc;">No Image</div>
+            {% endif %}
+            <div class="menu-info">
+                <div class="menu-name">{{ item.name }}</div>
+                <div class="menu-price">₹{{ item.price }}</div>
+                <div class="divider"></div>
+                <p class="menu-desc">{{ item.description }}</p>
+                <div class="btn-group">
+                    {% if not is_admin %}
+                    <a href="/add_to_cart/{{ item.id }}/" class="btn btn-primary">Add to Cart</a>
+                    {% endif %}
+                    {% if is_admin %}
+                    <a href="/delete_menu_item/{{ item.id }}/" class="btn" style="color: #8b0000; border-color: #8b0000;">Remove</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; grid-column: 1 / -1; padding: 5rem; color: var(--text-muted);">
+            <p>No menu items yet. Our master chefs are preparing something special.</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

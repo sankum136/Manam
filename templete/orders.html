@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | Manam Classic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --bg: #fdfbf7;
+            --card-bg: #ffffff;
+            --text: #1a1a1a;
+            --text-muted: #4a4a4a;
+        }
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 4rem 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            text-align: center;
+            font-weight: 700;
+        }
+        .order-card {
+            background: var(--card-bg);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid #f0e6d2;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #f0e6d2;
+        }
+        .order-id {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .order-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: 'Lora', serif;
+        }
+        .order-status {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .order-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .order-footer {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid #f0e6d2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .total-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Selection</a>
+        <h1>Your Order History</h1>
+        
+        {% for order in orders %}
+        <div class="order-card">
+            <div class="order-header">
+                <div>
+                    <div class="order-id">Collection #{{ order.id }}</div>
+                    <div class="order-date">{{ order.order_date|date:"F d, Y" }}</div>
+                </div>
+                <div class="order-status">{{ order.status }}</div>
+            </div>
+            <ul class="order-items">
+                {% for item in order.items.all %}
+                <li class="order-item">
+                    <span>{{ item.quantity }}x {{ item.menu_item.name }}</span>
+                    <span style="font-family: 'Playfair Display', serif;">₹{{ item.price }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="order-footer">
+                <span style="color: var(--text-muted); font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem;">Total Honorarium</span>
+                <span class="total-price">₹{{ order.total_price }}</span>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; padding: 5rem; color: var(--text-muted);">
+            <p>Your history with us is just beginning.</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

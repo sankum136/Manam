@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success | Premium Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #facc15;
+            --bg: #ffffff;
+            --card-bg: #fefce8;
+            --text: #1e293b;
+            --success: #10b981;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 4rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.1);
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .icon {
+            font-size: 5rem;
+            color: var(--success);
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #64748b;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: #1e293b;
+            text-decoration: none;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            box-shadow: 0 10px 15px -3px rgba(234, 179, 8, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="margin-bottom: 1.5rem;">
+            <img src="{% static 'images/logo.png' %}" alt="Manam Logo" style="height: 80px; width: 80px; object-fit: contain; box-shadow: 0 10px 25px rgba(0,0,0,0.1); background: white; padding: 5px; display: block; margin: 0 auto;">
+        </div>
+        <div class="icon">✓</div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for your order #{{ order.id }}. Our kitchen is already working on it. Your total was ₹{{ order.total_price }}.</p>
+        <a href="/my_orders/" class="btn">View My Orders</a>
+    </div>
+</body>
+</html>

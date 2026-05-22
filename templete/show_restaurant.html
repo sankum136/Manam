@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurants List | Premium Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #facc15;
+            --bg: #ffffff;
+            --card-bg: #fefce8;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #eab308, #ca8a04);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card-rating {
+            color: #eab308;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            height: 4.5rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        .actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #1e293b;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: #ca8a04;
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Explore Restaurants</h1>
+        <a href="/open_add_restaurant/" class="btn btn-primary">+ Add New</a>
+    </div>
+
+    <div class="container">
+        {% for restaurant in restaurantList %}
+        <div class="card">
+            <img src="{{ restaurant.image }}" class="card-img" alt="{{ restaurant.name }}">
+            <div class="card-content">
+                <div class="card-title">{{ restaurant.name }}</div>
+                <div class="card-rating">
+                    <span>★ {{ restaurant.rating }}/5</span>
+                </div>
+                <p class="card-desc">{{ restaurant.description }}</p>
+                
+                <div class="actions">
+                    <a href="/update_restaurant/{{ restaurant.id }}/" class="btn btn-outline">Update</a>
+                    <a href="/delete_restaurant/{{ restaurant.id }}/" class="btn btn-danger">Delete</a>
+                    <a href="/show_menu/{{ restaurant.id }}/?admin=true" class="btn btn-primary">View Menu</a>
+                    <a href="/add_review/{{ restaurant.id }}/" class="btn btn-primary">Add Review</a>
+                    <a href="/show_reviews/{{ restaurant.id }}/" class="btn btn-outline">Reviews</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

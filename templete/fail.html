@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied | Premium Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #facc15;
+            --bg: #ffffff;
+            --card-bg: #fefce8;
+            --text: #1e293b;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px -15px rgba(239, 68, 68, 0.1);
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .icon {
+            font-size: 4rem;
+            color: var(--danger);
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            background: var(--primary);
+            color: #1e293b;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(234, 179, 8, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">✕</div>
+        <h1>{{ message }}</h1>
+        <a href="/signin/" class="btn">Try Again</a>
+    </div>
+</body>
+</html>
