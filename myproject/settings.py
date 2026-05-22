@@ -1,3 +1,4 @@
+import os
 """
 Django settings for myproject project.
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-1yyv4=&dpcle&8x*e98&6&-wbs1x8fwqs2#mjyuz*1@(*$#-ao
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -118,8 +119,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    
 # Razorpay Settings
 RAZORPAY_KEY_ID = 'rzp_test_YOUR_KEY_ID'
 RAZORPAY_KEY_SECRET = 'YOUR_KEY_SECRET'
+
 
