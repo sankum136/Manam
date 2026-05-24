@@ -55,3 +55,10 @@ urlpatterns = [
     path('verify_payment/', views.verify_payment, name='verify_payment'),
     path('my_orders/', views.my_orders, name='my_orders'),
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -20,6 +20,8 @@
             --gold-dark: #cc9900;
             --bg-pure: #ffffff;
             --text-main: #001d3d;
+            --text-muted: #666666;
+            --primary: #003554;
             --border: rgba(0, 53, 84, 0.1);
         }
 
@@ -476,10 +478,139 @@
                 font-size: 2.5rem;
             }
         }
+
+        .discover-btn {
+            color: var(--gold) !important;
+            border-color: var(--gold) !important;
+        }
+
+        .dish-seafood {
+            background-image: url('{% static "images/seafood.png" %}');
+        }
+
+        .dish-lamb {
+            background-image: url('{% static "images/lamb.png" %}');
+        }
+
+        .dish-rice {
+            background-image: url('{% static "images/rice.png" %}');
+        }
+
+        .dish-chef {
+            background-image: url('{% static "images/chef.png" %}');
+        }
+
+        /* ─── Navbar ─── */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 5%;
+            transition: background 0.4s, box-shadow 0.4s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 53, 84, 0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--azure);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Lora', serif;
+            font-size: 0.9rem;
+            color: var(--azure);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-dark);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 0.6rem 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+
+        .nav-btn-outline {
+            border: 1px solid var(--azure);
+            color: var(--azure);
+        }
+
+        .nav-btn-outline:hover {
+            background: var(--azure);
+            color: white;
+        }
+
+        .nav-btn-fill {
+            background: var(--azure);
+            color: white;
+        }
+
+        .nav-btn-fill:hover {
+            background: var(--azure-light);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="mainNavbar">
+        <a href="/" class="nav-logo">Manam</a>
+        <ul class="nav-links">
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#dishes">Dishes</a></li>
+            <li><a href="#delivery">Delivery</a></li>
+            <li><a href="#chef">Chef</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="/signin/" class="nav-btn nav-btn-outline">Sign In</a>
+            <a href="/signup/" class="nav-btn nav-btn-fill">Join</a>
+        </div>
+    </nav>
+
     <header>
         <div class="hero-frame"></div>
         <div class="floating-dish dish-left"></div>
@@ -499,7 +630,7 @@
 
 
     <!-- Welcome Story Section -->
-    <section class="welcome-story">
+    <section class="welcome-story" id="story">
         <h2 class="section-title">A Journey Through Coastal Flavors</h2>
         <div class="welcome-content">
             <p>“At Manam, every dish is inspired by timeless coastal traditions, refined with modern culinary artistry.
@@ -508,19 +639,18 @@
     </section>
 
     <!-- Signature Dishes Section -->
-    <section class="signature-dishes">
+    <section class="signature-dishes" id="dishes">
         <h2 class="section-title" style="text-align: center;">Signature Dishes</h2>
         <div class="dish-grid">
             <div class="dish-card">
-                <div class="dish-image"
-                    style="background: url('{% static 'images/seafood.png' %}') center center / cover;"></div>
+                <div class="dish-image dish-seafood"></div>
                 <div class="dish-info">
                     <h4>Royal Seafood Platter</h4>
                     <p>Fresh ocean flavors crafted with Mediterranean spices.</p>
                 </div>
             </div>
             <div class="dish-card">
-                <div class="dish-image" style="background: url('{% static 'images/lamb.png' %}') center 60% / cover;">
+                <div class="dish-image dish-lamb" style="background-position: center 60%; background-size: cover;">
                 </div>
                 <div class="dish-info">
                     <h4>Firewood Lamb Roast</h4>
@@ -528,7 +658,7 @@
                 </div>
             </div>
             <div class="dish-card">
-                <div class="dish-image" style="background: url('{% static 'images/rice.png' %}') 75% 20% / cover;">
+                <div class="dish-image dish-rice" style="background-position: 75% 20%; background-size: cover;">
                 </div>
                 <div class="dish-info">
                     <h4>Golden Saffron Rice</h4>
@@ -540,7 +670,7 @@
     </section>
 
     <!-- Delivery Features Section -->
-    <section class="delivery-features">
+    <section class="delivery-features" id="delivery">
         <h2 class="section-title" style="text-align: center;">Beyond the Threshold</h2>
         <div class="features-grid">
             <div class="feature-card">
@@ -568,9 +698,9 @@
 
 
     <!-- Chef Experience Section -->
-    <section class="chef-experience">
+    <section class="chef-experience" id="chef">
         <div class="chef-image-container">
-            <div class="chef-image" style="background: url('{% static 'images/chef.png' %}') center center / cover;">
+            <div class="chef-image dish-chef" style="background-position: center center; background-size: cover;">
             </div>
             <div class="chef-badge">Mastery of the Flame</div>
         </div>
@@ -578,8 +708,7 @@
             <h2>Crafted by Master Chefs</h2>
             <p class="chef-text">“Our chefs blend heritage recipes with contemporary techniques, transforming every meal
                 into a ritual of elegance and authenticity.”</p>
-            <a href="/signin/" class="btn btn-outline" style="color: var(--gold); border-color: var(--gold);">Discover
-                the Craft</a>
+            <a href="/signin/" class="btn btn-outline discover-btn">Discover the Craft</a>
         </div>
     </section>
 
@@ -592,6 +721,17 @@
 
 
     {% include 'footer.html' %}
+
+    <script>
+        const navbar = document.getElementById('mainNavbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 
 </html>
